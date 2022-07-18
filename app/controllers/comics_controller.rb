@@ -20,6 +20,7 @@ class ComicsController < ApplicationController
 
   def create
     @comic = Comic.create(comic_params)
+    @error = @comic.errors.full_messages.to_sentence
     @results = all_comics
   end
 
