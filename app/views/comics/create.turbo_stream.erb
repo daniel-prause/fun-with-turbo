@@ -1,0 +1,12 @@
+<turbo-stream action="update" target="info">
+  <template>
+    <div class="error">
+      <%= @comic.errors.full_messages.to_sentence %>
+    </div>
+  </template>
+</turbo-stream>
+<turbo-stream action="update" target="comics">
+  <template>
+    <%= render partial: 'table', locals: { results: @results } %>
+  </template>
+</turbo-stream>

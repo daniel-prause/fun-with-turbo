@@ -1,0 +1,29 @@
+<turbo-stream action="update" target="comics">
+  <template>
+    <table>
+      <caption>
+        <h1><%= t('.caption') %></h1>
+      </caption>
+      <thead>
+        <tr>
+          <th>
+            <%= Comic.human_attribute_name(:name) %>
+          </th>
+          <th>
+            <%= Author.human_attribute_name(:name) %>
+          </th>
+        </tr>
+      </thead>
+      <% results.each do |comic| %>
+        <tr>
+          <td>
+            <%= comic.name %>
+          </td>
+          <td>
+            <%= comic.author.name %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </template>
+</turbo-stream>
