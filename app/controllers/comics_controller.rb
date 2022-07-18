@@ -21,9 +21,7 @@ class ComicsController < ApplicationController
   end
 
   def create
-    @comic = Comic.create(
-      comic_params
-    )
+    @comic = Comic.create(comic_params)
     @results = Comic
                .all
                .includes(:author)
