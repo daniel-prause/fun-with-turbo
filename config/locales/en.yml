@@ -30,6 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  record_not_found: Record not found
+  record_not_destroyed: Record not destroyed
   activerecord:
     models:
       comic: Comic
@@ -44,6 +46,8 @@ en:
       new: New comic
     table:
       caption: Comics
+      functions: Functions
     index:
       new: Create new comic
-      search: Search for
+    search:
+       search: Search for

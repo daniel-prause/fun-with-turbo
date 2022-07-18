@@ -3,9 +3,7 @@
 # this controller represents the backend route of our turbo search
 class ComicsController < ApplicationController
   def index
-    @results = Comic
-               .all
-               .includes(:author)
+    @results = all_comics
   end
 
   def search
@@ -22,9 +20,18 @@ class ComicsController < ApplicationController
 
   def create
     @comic = Comic.create(comic_params)
-    @results = Comic
-               .all
-               .includes(:author)
+    @results = all_comics
+  end
+
+  def destroy
+    comic = Comic.find(params[:id])
+    comic.destroy!
+  rescue ActiveRecord::RecordNotFound
+    @error = I18n.t('.record_not_found')
+  rescue ActiveRecord::RecordNotDestroyed
+    @error = I18n.t('.record_not_destroyed')
+  ensure
+    @results = all_comics
   end
 
   private
@@ -36,6 +43,10 @@ class ComicsController < ApplicationController
   def comic_params
     params
       .require(:comic)
-      .permit(:name, :author_id)
+      .permit(:id, :name, :author_id)
+  end
+
+  def all_comics
+    Comic.includes(:author)
   end
 end

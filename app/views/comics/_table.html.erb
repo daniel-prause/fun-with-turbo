@@ -12,6 +12,9 @@
           <th>
             <%= Author.human_attribute_name(:name) %>
           </th>
+          <th>
+            <%= t('.functions') %>
+          </th>
         </tr>
       </thead>
       <% results.each do |comic| %>
@@ -21,6 +24,13 @@
           </td>
           <td>
             <%= comic.author.name %>
+          </td>
+          <td>
+            <%= link_to '🗑️', comic_url(comic), data: {
+                  turbo_method: :delete,
+                  turbo_confirm: "Are you sure?"
+                }
+            %>
           </td>
         </tr>
       <% end %>

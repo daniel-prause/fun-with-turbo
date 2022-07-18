@@ -1,3 +1,4 @@
 {
-  "ruby.rubocop.executePath": "/usr/local/bin/rubocop-daemon-wrapper/"
+  "ruby.rubocop.executePath": "/usr/local/bin/rubocop-daemon-wrapper/",
+  "ruby.rubocop.suppressRubocopWarnings": true
 }
