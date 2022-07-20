@@ -1,3 +1,60 @@
+require: rubocop-rails
 AllCops:
+  NewCops: enable
   Exclude:
+    - 'node_modules/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - '.git/**/*'
     - 'bin/**/*'
+    - 'pkg/**/*'
+
+Layout/EndOfLine:
+  EnforcedStyle: lf
+
+Style/Lambda:
+  EnforcedStyle: line_count_dependent
+
+# If we want to have environment dependency, we can add it ourselves
+# but we don't need to slow down tasks that don't need it by loading it
+Rails/RakeEnvironment:
+  Enabled: false
+
+# We know what we're doing when we omit join models...
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Metrics/ClassLength:
+  Exclude:
+    # tests are supposed to be a bit longer...
+    - 'test/**/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'test/**/*'
+
+Rails/SquishedSQLHeredocs:
+  Exclude:
+    - 'db/migrate/*.rb'
+
+Metrics/MethodLength:
+  Max: 15 # otherwise it's often hard to build hashes
+  Exclude:
+    - 'test/**/*'
+    - 'db/**/*'
+
+Metrics/AbcSize:
+  Exclude:
+    - 'test/**/*'
+    - 'db/**/*'
+
+Rails/SkipsModelValidations:
+  Exclude:
+    - 'test/**/*'
+
+Style/OpenStructUse:
+  Exclude:
+    - 'test/**/*'
+
+Style/AsciiComments:
+  Enabled: false
