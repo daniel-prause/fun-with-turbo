@@ -3,5 +3,5 @@
 class Comic < ApplicationRecord
   belongs_to :author
 
-  validates :name, presence: true, uniqueness: { scope: :author_id }
+  validates :name, presence: true, uniqueness: { scope: :author_id } # rubocop:disable Rails/UniqueValidationWithoutIndex
 end
