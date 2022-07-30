@@ -1,11 +1,11 @@
-<%# render the search form %>
-<div class="w-25">
-  <%= render 'search' %>
-</div>
 <details>
   <summary><%= t('.new') %></summary>
   <%= render 'form' %>
 </details>
+<%# render the search form %>
+<div class="w-25">
+  <%= render 'search' %>
+</div>
 <%# we will show an error if something went wrong %>
 <%= turbo_frame_tag "error" do %>
 <% end %>
