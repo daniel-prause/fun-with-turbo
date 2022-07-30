@@ -1,11 +1,13 @@
 <%# render the search form %>
-<%= render 'search' %>
+<div class="w-25">
+  <%= render 'search' %>
+</div>
 <details>
   <summary><%= t('.new') %></summary>
   <%= render 'form' %>
 </details>
-<%# we will show an info if a comic has been created successfully or failed %>
-<%= turbo_frame_tag "info" do %>
+<%# we will show an error if something went wrong %>
+<%= turbo_frame_tag "error" do %>
 <% end %>
 <%# this represents the table %>
 <%= turbo_frame_tag "comics" do %>

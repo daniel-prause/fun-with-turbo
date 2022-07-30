@@ -1,8 +1,18 @@
 <%= form_for :comic, url: comics_path, method: :post, data: { 'turbo-frame': 'comics' } do |f| %>
   <fieldset>
     <legend><%= t('.new') %></legend>
-    <%= Comic.human_attribute_name(:name) %>: <%= f.text_field :name %><br />
-    <%= Author.human_attribute_name(:name) %>: <%= collection_select(:comic, :author_id, Author.all, :id, :name, prompt: true) %><br />
-    <%= f.submit %>
+    <div class="mb-3">
+      <label class="form-label">
+        <%= Comic.human_attribute_name(:name) %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </label>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">
+        <%= Author.human_attribute_name(:name) %>
+        <%= collection_select(:comic, :author_id, Author.all, :id, :name, { prompt: true } , { class: 'form-select' }) %>
+      </label>
+    </div>
+    <%= f.submit class: 'btn btn-primary' %>
   </fieldset>
 <% end %>

@@ -19,9 +19,10 @@ class ComicsController < ApplicationController
   end
 
   def create
-    @comic = Comic.create(comic_params)
+    @comic = Comic.new(comic_params)
+    @comic.save!
+  rescue StandardError
     @error = @comic.errors.full_messages.to_sentence
-    @results = all_comics
   end
 
   def destroy
@@ -32,7 +33,7 @@ class ComicsController < ApplicationController
   rescue ActiveRecord::RecordNotDestroyed
     @error = I18n.t('.record_not_destroyed')
   ensure
-    @results = all_comics
+    @comic = Comic.new(id: params[:id])
   end
 
   private
