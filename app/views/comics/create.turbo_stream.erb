@@ -1,12 +1,1 @@
-<turbo-stream action="update" target="error">
-  <template>
-    <div class="error">
-      <%= @error %>
-    </div>
-  </template>
-</turbo-stream>
-<turbo-stream action="update" target="comics">
-  <template>
-    <%= turbo_frame_tag "comics", src: 'comics' %>
-  </template>
-</turbo-stream>
+<%= render partial: 'update_streams', locals: { error: @error } %>
