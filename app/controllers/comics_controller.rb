@@ -16,8 +16,6 @@ class ComicsController < ApplicationController
     @comic.save!
   rescue StandardError
     @error = @comic.errors.full_messages.to_sentence
-  ensure
-    @results = Comic.with_author
   end
 
   def destroy
@@ -27,8 +25,6 @@ class ComicsController < ApplicationController
     @error = I18n.t('.record_not_found')
   rescue ActiveRecord::RecordNotDestroyed
     @error = I18n.t('.record_not_destroyed')
-  ensure
-    @results = Comic.with_author
   end
 
   private

@@ -13,6 +13,6 @@
         <%= collection_select(:comic, :author_id, Author.all, :id, :name, { prompt: true } , { class: 'form-select' }) %>
       </label>
     </div>
-    <%= f.submit class: 'btn btn-primary', onclick: "document.getElementById('search').value = ''" %>
+    <%= f.submit class: 'btn btn-primary' %>
   </fieldset>
 <% end %>

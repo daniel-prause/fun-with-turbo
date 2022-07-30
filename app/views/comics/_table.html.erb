@@ -1,4 +1,4 @@
-<turbo-stream action="update" target="comics">
+<turbo-stream action="update" target="comics_table">
   <template>
     <table class="table table-striped caption-top">
       <caption>
@@ -17,23 +17,9 @@
           </th>
         </tr>
       </thead>
-      <tbody id="comics_table">
+      <tbody id="comics">
         <% results.each do |comic| %>
-          <tr id="<%= dom_id(comic) %>">
-            <td>
-              <%= comic.name %>
-            </td>
-            <td>
-              <%= comic.author.name %>
-            </td>
-            <td>
-              <%= link_to '🗑️', comic_url(comic), data: {
-                  turbo_method: :delete,
-                  turbo_confirm: "Are you sure?"
-                }
-              %>
-            </td>
-          </tr>
+          <%= render partial: 'comic_row', locals: { indicator_class: 'old', comic: comic } %>
         <% end %>
       </tbody>
     </table>
