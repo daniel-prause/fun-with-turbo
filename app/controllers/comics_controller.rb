@@ -7,9 +7,8 @@ class ComicsController < ApplicationController
   end
 
   def search
-    @results = Comic
+    @results = all_comics
                .joins(:author)
-               .includes(:author)
                .where(Comic.sanitize_sql_for_conditions(['comics.name LIKE ?', "%#{search_params[:search]}%"]))
                .or(
                  Author.where(
@@ -23,6 +22,8 @@ class ComicsController < ApplicationController
     @comic.save!
   rescue StandardError
     @error = @comic.errors.full_messages.to_sentence
+  ensure
+    @results = all_comics
   end
 
   def destroy
@@ -33,7 +34,7 @@ class ComicsController < ApplicationController
   rescue ActiveRecord::RecordNotDestroyed
     @error = I18n.t('.record_not_destroyed')
   ensure
-    @comic = Comic.new(id: params[:id])
+    @results = all_comics
   end
 
   private
