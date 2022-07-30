@@ -3,18 +3,12 @@
 # this controller represents the backend route of our turbo search
 class ComicsController < ApplicationController
   def index
-    @results = all_comics
+    @results = Comic.with_author
   end
 
   def search
-    @results = all_comics
-               .joins(:author)
-               .where(Comic.sanitize_sql_for_conditions(['comics.name LIKE ?', "%#{search_params[:search]}%"]))
-               .or(
-                 Author.where(
-                   Author.sanitize_sql_for_conditions(['authors.name LIKE ?', "%#{search_params[:search]}%"])
-                 )
-               )
+    @results = Comic.with_author
+                    .with_search_term(search_params[:search])
   end
 
   def create
@@ -23,7 +17,7 @@ class ComicsController < ApplicationController
   rescue StandardError
     @error = @comic.errors.full_messages.to_sentence
   ensure
-    @results = all_comics
+    @results = Comic.with_author
   end
 
   def destroy
@@ -34,7 +28,7 @@ class ComicsController < ApplicationController
   rescue ActiveRecord::RecordNotDestroyed
     @error = I18n.t('.record_not_destroyed')
   ensure
-    @results = all_comics
+    @results = Comic.with_author
   end
 
   private
@@ -47,9 +41,5 @@ class ComicsController < ApplicationController
     params
       .require(:comic)
       .permit(:id, :name, :author_id)
-  end
-
-  def all_comics
-    Comic.includes(:author)
   end
 end
