@@ -1,12 +1,12 @@
-<tr id="<%= dom_id(comic) %>" class="<%= indicator_class %>">
+<tr id="<%= dom_id(comic_row) %>" class="<%= indicator_class %>">
   <td>
-    <%= comic.name %>
+    <%= comic_row.name %>
   </td>
   <td>
-    <%= comic.author.name %>
+    <%= comic_row.author.name %>
   </td>
   <td>
-    <%= link_to '🗑️', comic_path(comic), data: {
+    <%= link_to '🗑️', comic_path(comic_row), data: {
                   turbo_method: :delete,
                   turbo_confirm: "Are you sure?"
                 }

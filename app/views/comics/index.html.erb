@@ -13,6 +13,6 @@
   <%# this represents the table %>
   <%= turbo_stream_from "comics" %>
   <%= turbo_frame_tag 'comics_table' do %>
-    <%= render partial: 'table', locals: { results: @results } %>
+    <%= render partial: 'table', locals: { comics: @comics } %>
   <% end %>
 </div>

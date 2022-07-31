@@ -18,9 +18,7 @@
         </tr>
       </thead>
       <tbody id="comics">
-        <% results.each do |comic| %>
-          <%= render partial: 'comic_row', locals: { indicator_class: 'old', comic: comic } %>
-        <% end %>
+        <%= render partial: 'comic_row', collection: comics, locals: { indicator_class: 'old' } %>
       </tbody>
     </table>
   </template>

@@ -3,27 +3,26 @@
 # this controller represents the backend route of our turbo search
 class ComicsController < ApplicationController
   def index
-    @results = Comic.with_author
+    @comics = Comic.with_author
   end
 
+  # TODO: get rid of separate search method and use index!
   def search
-    @results = Comic.with_author
-                    .with_search_term(search_params[:search])
+    @comics = Comic.with_author
+                   .with_search_term(search_params[:search])
   end
 
   def create
     @comic = Comic.new(comic_params)
-    @comic.save!
-  rescue StandardError
+    return if @comic.save
+
     @error = @comic.errors.full_messages.to_sentence
   end
 
   def destroy
     comic = Comic.find(params[:id])
-    comic.destroy!
-  rescue ActiveRecord::RecordNotFound
-    @error = I18n.t('.record_not_found')
-  rescue ActiveRecord::RecordNotDestroyed
+    return if comic.destroy
+
     @error = I18n.t('.record_not_destroyed')
   end
 
