@@ -18,7 +18,7 @@
         </tr>
       </thead>
       <tbody id="comics">
-        <%= render partial: 'comic_row', collection: comics, locals: { indicator_class: 'old' } %>
+        <%= render partial: 'comic_row', collection: @comics, locals: { indicator_class: 'old' } %>
       </tbody>
     </table>
   </template>
