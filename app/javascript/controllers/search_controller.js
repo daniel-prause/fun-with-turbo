@@ -1,16 +1,18 @@
 
 import { Controller } from "@hotwired/stimulus";
-import { post } from '@rails/request.js';
+import { get } from '@rails/request.js';
 
 export default class extends Controller {
 
   static targets = ["searchField", "searchForm"]
   async search() {
-    post(this.searchFormTarget.action, {
-      responseKind: "turbo-stream",
-      body: {
-        search: this.searchFieldTarget.value
-      }
+    const documentURL = new URL(this.searchFormTarget.action);
+    documentURL.searchParams.set(
+      'search',
+      this.searchFieldTarget.value
+    );
+    get(documentURL, {
+      responseKind: 'turbo-stream'
     })
   }
 }

@@ -4,11 +4,6 @@
 class ComicsController < ApplicationController
   def index
     @comics = Comic.with_author
-  end
-
-  # TODO: get rid of separate search method and use index!
-  def search
-    @comics = Comic.with_author
                    .with_search_term(search_params[:search])
   end
 
