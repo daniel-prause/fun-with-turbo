@@ -6,10 +6,11 @@
     <%= comic_row.author.name %>
   </td>
   <td>
-    <%= link_to '🗑️', comic_path(comic_row), data: {
+    <%= link_to(comic_path(comic_row),  data: {
                   turbo_method: :delete,
                   turbo_confirm: "Are you sure?"
-                }
-              %>
+                }) do %>
+      <i class="fa-solid fa-trash text-danger"></i>
+    <% end %>
   </td>
 </tr>
