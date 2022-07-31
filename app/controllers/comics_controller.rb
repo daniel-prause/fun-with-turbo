@@ -5,6 +5,7 @@ class ComicsController < ApplicationController
   def index
     @comics = Comic.with_author
                    .with_search_term(search_params[:search])
+                   .order(name: :asc)
   end
 
   def create
