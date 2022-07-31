@@ -14,6 +14,13 @@ export default class extends Controller {
     useDebounce(this, { wait: 200 })
   }
 
+  reset() {
+    if (this.searchFieldTarget.value != '') {
+      this.searchFieldTarget.value = ''
+      this.search()
+    }
+  }
+
   async search() {
     const documentURL = new URL(this.searchFormTarget.action);
     if (this.searchFieldTarget.value != '') {

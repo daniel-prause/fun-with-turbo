@@ -1,6 +1,9 @@
 <%= form_with url: comics_path, method: :get, data: { 'turbo-frame': 'comics', 'search-target': 'searchForm' } do |form| %>
   <%= form.label :search, t('.search'), class: 'form-label' %>
-  <%= form.search_field :search, data: { 'search-target': 'searchField', action: 'search#search' }, value: params[:search], autocomplete: 'off', class: 'form-control'  %>
+  <div class="input-group">
+    <%= form.search_field :search, data: { 'search-target': 'searchField', action: 'search#search' }, value: params[:search], autocomplete: 'off', class: 'form-control'  %>
+    <div class="user-select-none btn btn-primary" role="button" data-action="click->search#reset">X</div>
+  </div>
 <% end %>
 <div class="alert alert-info mt-3">
   The <span class="text-info">highlighted</span> entries are new entries and are not taken into account by the search field.
