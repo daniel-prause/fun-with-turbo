@@ -15,7 +15,7 @@ export default class extends Controller {
   }
 
   reset() {
-    if (this.searchFieldTarget.value != '') {
+    if (this.searchFieldTarget.value) {
       this.searchFieldTarget.value = ''
       this.search()
     }
@@ -23,7 +23,7 @@ export default class extends Controller {
 
   async search() {
     const documentURL = new URL(this.searchFormTarget.action);
-    if (this.searchFieldTarget.value != '') {
+    if (this.searchFieldTarget.value) {
       documentURL.searchParams.set(
         'search',
         this.searchFieldTarget.value
