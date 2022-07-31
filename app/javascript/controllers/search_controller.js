@@ -7,11 +7,14 @@ export default class extends Controller {
   static targets = ["searchField", "searchForm"]
   async search() {
     const documentURL = new URL(this.searchFormTarget.action);
-    documentURL.searchParams.set(
-      'search',
-      this.searchFieldTarget.value
-    );
-    get(documentURL, {
+    if (this.searchFieldTarget.value != '') {
+      documentURL.searchParams.set(
+        'search',
+        this.searchFieldTarget.value
+      );
+    }
+    window.history.replaceState({}, document.title, documentURL);
+    await get(documentURL, {
       responseKind: 'turbo-stream'
     })
   }
