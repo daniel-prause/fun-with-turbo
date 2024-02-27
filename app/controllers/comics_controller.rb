@@ -13,24 +13,30 @@ class ComicsController < ApplicationController
 
   def create
     @comic = Comic.new(comic_params)
-    @error = @comic.errors.full_messages.to_sentence unless @comic.save
+    if @comic.save
+      head :ok
+    else
+      @error = @comic.errors.full_messages.to_sentence
+      head :unprocessable_entity
+    end
     @results = Comic.with_author
   end
 
   def destroy
     comic = Comic.find_by(id: params[:id])
-    if comic
-      comic.destroy
+    @results = Comic.with_author
+    if comic.destroy
+      head :ok
     else
       @error = I18n.t('.record_not_found')
+      head :unprocessable_entity
     end
-    @results = Comic.with_author
   end
 
   private
 
   def search_params
-    params.permit(:search)
+    params.permit(:search, :authenticity_token)
   end
 
   def comic_params
