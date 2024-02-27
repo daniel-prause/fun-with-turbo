@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# this controller represents the backend route of our turbo search
+# This controller represents the backend route of our turbo search
 class ComicsController < ApplicationController
   def index
     @results = Comic.with_author
@@ -13,21 +13,17 @@ class ComicsController < ApplicationController
 
   def create
     @comic = Comic.new(comic_params)
-    @comic.save!
-  rescue StandardError
-    @error = @comic.errors.full_messages.to_sentence
-  ensure
+    @error = @comic.errors.full_messages.to_sentence unless @comic.save
     @results = Comic.with_author
   end
 
   def destroy
-    comic = Comic.find(params[:id])
-    comic.destroy!
-  rescue ActiveRecord::RecordNotFound
-    @error = I18n.t('.record_not_found')
-  rescue ActiveRecord::RecordNotDestroyed
-    @error = I18n.t('.record_not_destroyed')
-  ensure
+    comic = Comic.find_by(id: params[:id])
+    if comic
+      comic.destroy
+    else
+      @error = I18n.t('.record_not_found')
+    end
     @results = Comic.with_author
   end
 
@@ -38,8 +34,6 @@ class ComicsController < ApplicationController
   end
 
   def comic_params
-    params
-      .require(:comic)
-      .permit(:id, :name, :author_id)
+    params.require(:comic).permit(:id, :name, :author_id)
   end
 end
