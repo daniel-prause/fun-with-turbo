@@ -10,16 +10,18 @@ class ComicsController < ApplicationController
 
   def create
     @comic = Comic.new(comic_params)
-    return if @comic.save
+    return head :ok if @comic.save
 
     @error = @comic.errors.full_messages.to_sentence
+    head :unprocessable_entity
   end
 
   def destroy
     comic = Comic.find(params[:id])
-    return if comic.destroy
+    return head :ok if comic.destroy
 
     @error = I18n.t('.record_not_destroyed')
+    head :unprocessable_entity
   end
 
   private
